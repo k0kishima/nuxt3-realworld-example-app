@@ -31,3 +31,22 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+
+# Logs
+logs
+*.log
+
+# Misc
+.fleet
+
+# Local env files
+.env
+.env.*
+!.env.example
