@@ -10,6 +10,10 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "nuxt": "^3.7.1"
+  },
+  "volta": {
+    "node": "20.6.1"
   }
 }
