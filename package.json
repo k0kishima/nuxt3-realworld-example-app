@@ -10,7 +10,10 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config": "^12.0.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "nuxt": "^3.7.1",
     "prettier": "^3.0.3"
   },
