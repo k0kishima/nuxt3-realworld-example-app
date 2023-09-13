@@ -1,3 +1,3 @@
 <template>
-  <AppHeader />
+  <TheHeader />
 </template>
