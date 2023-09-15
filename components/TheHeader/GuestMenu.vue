@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li><a>Home</a></li>
-    <li><a>Sign in</a></li>
+    <li><NuxtLink href="/">Home</NuxtLink></li>
+    <li><NuxtLink href="/user/login">Sign in</NuxtLink></li>
     <li><a>Sign up</a></li>
   </ul>
 </template>

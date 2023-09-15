@@ -4,7 +4,9 @@ const title = APP_NAME.toLocaleLowerCase();
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
+  <h1>
+    <NuxtLink href="/">{{ title }}</NuxtLink>
+  </h1>
 </template>
 
 <style scoped>
