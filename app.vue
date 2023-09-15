@@ -1,3 +1,5 @@
 <template>
-  <TheHeader />
+  <NuxtLayout>
+    <TheContainer> to be implemented. </TheContainer>
+  </NuxtLayout>
 </template>
