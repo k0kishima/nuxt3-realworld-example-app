@@ -1,17 +1,12 @@
-<script setup>
-import AppLogo from './AppLogo.vue';
-import GuestMenu from './GuestMenu.vue';
-</script>
-
 <template>
   <header>
     <nav>
       <div class="container">
         <div class="logo">
-          <AppLogo />
+          <TheHeaderAppLogo />
         </div>
         <div class="menu">
-          <GuestMenu />
+          <TheHeaderGuestMenu />
         </div>
       </div>
     </nav>
