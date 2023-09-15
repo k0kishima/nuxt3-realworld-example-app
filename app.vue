@@ -1,6 +1,3 @@
 <template>
-  <div>
-    <TheHeader />
-    <TheFooter />
-  </div>
+  <NuxtLayout> to be implemented. </NuxtLayout>
 </template>
