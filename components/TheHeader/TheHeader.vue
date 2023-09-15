@@ -34,6 +34,13 @@ nav {
   padding-right: 15px;
 }
 
+.container:after,
+.container:before {
+  content: '';
+  clear: both;
+  display: block;
+}
+
 @media (min-width: 544px) {
   .container {
     max-width: 576px;
