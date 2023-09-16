@@ -35,6 +35,8 @@
     "node": "20.6.1"
   },
   "dependencies": {
-    "vee-validate": "^4.11.6"
+    "@vee-validate/zod": "^4.11.6",
+    "vee-validate": "^4.11.6",
+    "zod": "^3.22.2"
   }
 }
