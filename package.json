@@ -12,7 +12,10 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,css,scss,vue}": ["npm run format", "npm run lint"]
+    "*.{ts,tsx,js,jsx,css,scss,vue}": [
+      "npm run format",
+      "npm run lint"
+    ]
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -30,5 +33,8 @@
   },
   "volta": {
     "node": "20.6.1"
+  },
+  "dependencies": {
+    "vee-validate": "^4.11.6"
   }
 }
