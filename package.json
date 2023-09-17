@@ -35,7 +35,9 @@
     "node": "20.6.1"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
     "@vee-validate/zod": "^4.11.6",
+    "pinia": "^2.1.6",
     "vee-validate": "^4.11.6",
     "zod": "^3.22.2"
   }
