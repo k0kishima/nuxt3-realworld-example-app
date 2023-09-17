@@ -2,6 +2,8 @@
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
+import { authStore } from '~/stores/auth';
+import { API_BASE_URL } from '~/constants';
 
 const validationSchema = toTypedSchema(
   zod.object({
@@ -22,8 +24,26 @@ const { handleSubmit, errors } = useForm({
 const { value: email } = useField('email');
 const { value: password } = useField('password');
 
-const onSubmit = handleSubmit((values) => {
-  alert(JSON.stringify(values, null, 2));
+const auth = authStore();
+const onSubmit = handleSubmit(async (values) => {
+  const body = JSON.stringify({
+    user: {
+      email: values.email,
+      password: values.password,
+    },
+  });
+
+  // eslint-disable-next-line no-undef
+  const { data } = await useFetch(`${API_BASE_URL}/users/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body,
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  auth.signIn(data.value.user.token as string);
 });
 </script>
 
