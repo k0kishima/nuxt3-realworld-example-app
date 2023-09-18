@@ -26,15 +26,19 @@ const { value: email } = useField('email');
 const { value: password } = useField('password');
 
 const onSubmit = handleSubmit(async (values) => {
-  const response = await login({
-    user: {
-      email: values.email,
-      password: values.password,
-    },
-  });
+  try {
+    const response = await login({
+      user: {
+        email: values.email,
+        password: values.password,
+      },
+    });
 
-  const auth = authStore();
-  auth.signIn(response.user.token);
+    const auth = authStore();
+    auth.signIn(response.user.token);
+  } catch (error) {
+    alert(error);
+  }
 });
 </script>
 
