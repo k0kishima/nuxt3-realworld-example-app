@@ -2,14 +2,8 @@
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
-import { paths } from '~/openapi.gen';
 import { authStore } from '~/stores/auth';
-import { API_BASE_URL } from '~/constants';
-
-type LoginUserRequest =
-  paths['/users/login']['post']['requestBody']['content']['application/json'];
-type SuccessResponse =
-  paths['/users/login']['post']['responses']['200']['content']['application/json'];
+import { login } from '~/lib/api/auth';
 
 const validationSchema = toTypedSchema(
   zod.object({
@@ -23,6 +17,7 @@ const validationSchema = toTypedSchema(
       .min(8, { message: 'Too short' }),
   })
 );
+
 const { handleSubmit, errors } = useForm({
   validationSchema,
 });
@@ -30,28 +25,16 @@ const { handleSubmit, errors } = useForm({
 const { value: email } = useField('email');
 const { value: password } = useField('password');
 
-const auth = authStore();
 const onSubmit = handleSubmit(async (values) => {
-  const body: LoginUserRequest = {
+  const response = await login({
     user: {
       email: values.email,
       password: values.password,
     },
-  };
+  });
 
-  // eslint-disable-next-line no-undef
-  const { data } = await useFetch<SuccessResponse>(
-    `${API_BASE_URL}/users/login`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
-    }
-  );
-
-  auth.signIn(data.value?.user?.token as string);
+  const auth = authStore();
+  auth.signIn(response.user.token);
 });
 </script>
 
