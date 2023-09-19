@@ -35,7 +35,7 @@ const onSubmit = handleSubmit(async (values) => {
     });
 
     const auth = authStore();
-    auth.signIn(response.user.token);
+    auth.signIn(response.user);
   } catch (error) {
     alert(error);
   }
