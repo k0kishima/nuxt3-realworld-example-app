@@ -21,4 +21,5 @@ export const authStore = defineStore({
       this.currentUser = user;
     },
   },
+  persist: true,
 });
