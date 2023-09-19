@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { navigateTo } from 'nuxt/app';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
@@ -36,6 +37,8 @@ const onSubmit = handleSubmit(async (values) => {
 
     const auth = authStore();
     auth.signIn(response.user);
+
+    await navigateTo('/');
   } catch (error) {
     alert(error);
   }

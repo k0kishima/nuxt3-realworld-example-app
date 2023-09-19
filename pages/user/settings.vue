@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { navigateTo } from 'nuxt/app';
 import { authStore } from '~/stores/auth';
 
-const onLogoutButtonClick = () => {
-  const auth = authStore();
+// TODO: use a middleware
+const auth = authStore();
+
+if (!auth.isAuthenticated) {
+  await navigateTo('/');
+}
+
+console.log(auth.currentUser);
+
+const onLogoutButtonClick = async () => {
   auth.signOut();
+  await navigateTo('/');
 };
 </script>
 
