@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { authStore } from '~/stores/auth';
+const auth = authStore();
+</script>
+
 <template>
   <header>
     <nav>
@@ -6,7 +11,8 @@
           <TheHeaderAppLogo />
         </div>
         <div class="menu">
-          <TheHeaderGuestMenu />
+          <TheHeaderMemberMenu v-if="auth.isAuthenticated" />
+          <TheHeaderGuestMenu v-else />
         </div>
       </div>
     </nav>

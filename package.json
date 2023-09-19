@@ -9,10 +9,13 @@
     "postinstall": "nuxt prepare",
     "format": "prettier --write --ignore-path .gitignore",
     "lint": "eslint --ext .js,.vue,.ts,.tsx --ignore-path .gitignore --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate:api": "npx openapi-typescript openapi.yml --output openapi.gen.ts"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,css,scss,vue}": ["npm run format", "npm run lint"]
+    "*.{ts,tsx,js,jsx,css,scss,vue}": [
+      "sh -c 'if ! echo $1 | grep -E \".gen.ts$\"; then npm run format $1 && npm run lint $1; fi' --"
+    ]
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -30,5 +33,12 @@
   },
   "volta": {
     "node": "20.6.1"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "@vee-validate/zod": "^4.11.6",
+    "pinia": "^2.1.6",
+    "vee-validate": "^4.11.6",
+    "zod": "^3.22.2"
   }
 }

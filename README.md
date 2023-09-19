@@ -21,3 +21,15 @@ For more information on how to this works with other frontends/backends, head ov
 
 > npm install, npm start, etc.
 
+## Generate TypeScript types from an OpenAPI schema file
+
+You can generate types automatically by bellow command.
+
+```
+$ npm run generate:api
+```
+
+Then `openapi.gen.ts` generated.
+
+The schema file path is placed `openapi.yml`.
+Update the file if you needed before generate types.

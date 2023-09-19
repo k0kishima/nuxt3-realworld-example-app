@@ -1,8 +1,15 @@
+<script setup lang="ts">
+import { authStore } from '~/stores/auth';
+const auth = authStore();
+</script>
 <template>
   <ul>
     <li><NuxtLink href="/">Home</NuxtLink></li>
-    <li><NuxtLink href="/user/login">Sign in</NuxtLink></li>
-    <li><a>Sign up</a></li>
+    <li><a>New Article</a></li>
+    <li><a>Settings</a></li>
+    <li>
+      <a>{{ auth.currentUser?.username }}</a>
+    </li>
   </ul>
 </template>
 

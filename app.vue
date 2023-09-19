@@ -1,5 +1,5 @@
 <template>
   <NuxtLayout>
-    <TheContainer> to be implemented. </TheContainer>
+    <NuxtPage />
   </NuxtLayout>
 </template>
