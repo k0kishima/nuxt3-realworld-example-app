@@ -6,7 +6,7 @@ const auth = authStore();
   <ul>
     <li><NuxtLink href="/">Home</NuxtLink></li>
     <li><a>New Article</a></li>
-    <li><a>Settings</a></li>
+    <li><NuxtLink href="/user/settings">Settings</NuxtLink></li>
     <li>
       <a>{{ auth.currentUser?.username }}</a>
     </li>

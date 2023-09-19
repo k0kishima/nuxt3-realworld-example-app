@@ -20,6 +20,9 @@ export const authStore = defineStore({
     signIn(user: User) {
       this.currentUser = user;
     },
+    signOut() {
+      this.currentUser = undefined;
+    },
   },
   persist: true,
 });
