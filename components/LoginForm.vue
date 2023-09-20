@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { navigateTo } from 'nuxt/app';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
 import { authStore } from '~/stores/auth';
 import { login } from '~/lib/api/auth';
+import { ref, navigateTo } from '#imports';
+
+const isSubmitting = ref(false);
 
 const validationSchema = toTypedSchema(
   zod.object({
@@ -27,6 +29,8 @@ const { value: email } = useField('email');
 const { value: password } = useField('password');
 
 const onSubmit = handleSubmit(async (values) => {
+  isSubmitting.value = true;
+
   try {
     const response = await login({
       user: {
@@ -41,6 +45,8 @@ const onSubmit = handleSubmit(async (values) => {
     await navigateTo('/');
   } catch (error) {
     alert(error);
+  } finally {
+    isSubmitting.value = false;
   }
 });
 </script>
@@ -48,11 +54,11 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <form @submit="onSubmit">
     <fieldset>
-      <fieldset class="form-group">
+      <fieldset class="form-group" :disabled="isSubmitting">
         <input v-model="email" name="email" type="email" placeholder="Email" />
         <span class="error">{{ errors.email }}</span>
       </fieldset>
-      <fieldset class="form-group">
+      <fieldset class="form-group" :disabled="isSubmitting">
         <input
           v-model="password"
           name="password"
@@ -61,7 +67,7 @@ const onSubmit = handleSubmit(async (values) => {
         />
         <span class="error">{{ errors.password }}</span>
       </fieldset>
-      <button>Sign in</button>
+      <button :disabled="isSubmitting">Sign in</button>
     </fieldset>
   </form>
 </template>
@@ -103,5 +109,15 @@ button {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
   border-radius: 0.3rem;
+}
+
+fieldset:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 </style>
