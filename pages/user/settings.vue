@@ -9,8 +9,6 @@ if (!auth.isAuthenticated) {
   await navigateTo('/');
 }
 
-console.log(auth.currentUser);
-
 const onLogoutButtonClick = async () => {
   auth.signOut();
   await navigateTo('/');
@@ -26,8 +24,9 @@ const onLogoutButtonClick = async () => {
 
     <div class="container">
       <TheContainer>
-        <h1>Your Settings</h1>
-        <hr />
+        <h1 class="mb-5">Your Settings</h1>
+        <SettingForm class="mb-5" />
+        <hr class="mb-5" />
         <button @click="onLogoutButtonClick">Or click here to logout.</button>
       </TheContainer>
     </div>
