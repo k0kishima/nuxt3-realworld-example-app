@@ -15,7 +15,7 @@ const validationSchema = toTypedSchema(
     password: zod
       .string()
       .nonempty('This is required')
-      .min(8, { message: 'Too short' }),
+      .min(6, { message: 'Too short' }),
   })
 );
 
