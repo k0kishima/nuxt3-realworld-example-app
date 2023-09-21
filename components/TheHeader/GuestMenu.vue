@@ -1,7 +1,21 @@
+<script setup lang="ts">
+import { useRoute } from '#imports';
+const route = useRoute();
+</script>
 <template>
   <ul>
-    <li><NuxtLink href="/">Home</NuxtLink></li>
-    <li><NuxtLink href="/user/login">Sign in</NuxtLink></li>
+    <li>
+      <NuxtLink href="/" :class="{ active: route.name === 'index' }"
+        >Home</NuxtLink
+      >
+    </li>
+    <li>
+      <NuxtLink
+        href="/user/login"
+        :class="{ active: route.name === 'user-login' }"
+        >Sign in</NuxtLink
+      >
+    </li>
     <li><a>Sign up</a></li>
   </ul>
 </template>
@@ -26,5 +40,9 @@ a {
   display: block;
   padding-top: 0.425rem;
   padding-bottom: 0.425rem;
+}
+
+.active {
+  color: rgba(0, 0, 0, 0.8);
 }
 </style>
