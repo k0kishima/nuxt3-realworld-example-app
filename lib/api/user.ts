@@ -16,3 +16,26 @@ export const updateUser = (token: string, userSetting: UserSetting) => {
     body: userSetting,
   });
 };
+
+type CreateUserResponse =
+  paths['/users']['post']['responses']['201']['content']['application/json'];
+
+export const createUser = (
+  username: string,
+  email: string,
+  password: string
+) => {
+  return $fetch<CreateUserResponse>(`${API_BASE_URL}/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: {
+      user: {
+        username,
+        email,
+        password,
+      },
+    },
+  });
+};
