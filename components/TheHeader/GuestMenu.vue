@@ -16,7 +16,13 @@ const route = useRoute();
         >Sign in</NuxtLink
       >
     </li>
-    <li><a>Sign up</a></li>
+    <li>
+      <NuxtLink
+        href="/user/register"
+        :class="{ active: route.name === 'user-register' }"
+        >Sign up</NuxtLink
+      >
+    </li>
   </ul>
 </template>
 
