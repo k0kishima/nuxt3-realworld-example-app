@@ -84,4 +84,10 @@ const setActiveTab = (tabLabel: string) => {
     }
   }
 }
+.switchable:after,
+.switchable:before {
+  content: '';
+  clear: both;
+  display: block;
+}
 </style>
