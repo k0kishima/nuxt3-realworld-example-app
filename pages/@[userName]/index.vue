@@ -34,10 +34,14 @@ type GetArticlesResponse =
 
 const apiUrl = computed(() => {
   const url = new URL(`${API_BASE_URL}/articles`);
+  url.searchParams.append('limit', '10');
   if (currentTab.value === 'Favorited Articles') {
     url.searchParams.append('favorited', userName);
   } else {
     url.searchParams.append('author', userName);
+  }
+  if (route.query.offset) {
+    url.searchParams.append('offset', route.query.offset as string);
   }
   return url.toString();
 });
@@ -74,6 +78,10 @@ const { data, pending } = useFetch<GetArticlesResponse>(apiUrl, {
           </p>
           <div v-else-if="data && data.articles">
             <ArticleList :articles="data.articles" />
+            <CustomPagination
+              :base-url="`/@${userName}`"
+              :entity-count="data.articlesCount"
+            />
           </div>
         </div>
       </div>

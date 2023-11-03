@@ -66,7 +66,6 @@ const props = defineProps<{
   </div>
 </template>
 
-<!-- 既存のスタイルや追加のスタイルをこちらに -->
 <style scoped>
 .article-preview {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
