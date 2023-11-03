@@ -22,7 +22,12 @@ const route = useRoute();
       </NuxtLink>
     </li>
     <li>
-      <a>{{ auth.currentUser?.username }}</a>
+      <NuxtLink
+        :to="'/@' + auth.currentUser?.username"
+        :class="{ active: route.name === `@${auth.currentUser?.username}` }"
+      >
+        {{ auth.currentUser?.username }}
+      </NuxtLink>
     </li>
   </ul>
 </template>
