@@ -2,7 +2,7 @@
 import { useRoute, ref, useFetch, computed } from '#imports';
 import { authStore } from '~/stores/auth';
 import { API_BASE_URL } from '~/constants';
-import { paths } from '~/openapi.gen';
+import { GetArticlesResponse } from '~/types';
 
 const route = useRoute();
 const userName = route.params.userName;
@@ -28,9 +28,6 @@ const currentTab = ref(
 const handleActiveTabChange = (newActiveTab: string) => {
   currentTab.value = newActiveTab;
 };
-
-type GetArticlesResponse =
-  paths['/articles']['get']['responses']['200']['content']['application/json'];
 
 const apiUrl = computed(() => {
   const url = new URL(`${API_BASE_URL}/articles`);
