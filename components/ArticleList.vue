@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import { paths } from '~/openapi.gen';
+import { GetArticlesResponse } from '~/types';
 
-type GetArticlesResponse =
-  paths['/articles']['get']['responses']['200']['content']['application/json'];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   articles: GetArticlesResponse['articles'];
