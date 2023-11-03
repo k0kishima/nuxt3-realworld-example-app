@@ -5,6 +5,6 @@
       <title>Home — Conduit</title>
     </Head>
 
-    <TheContainer> to be implemented. </TheContainer>
+    <AppJumbotron />
   </div>
 </template>
