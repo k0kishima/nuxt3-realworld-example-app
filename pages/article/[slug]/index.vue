@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useRoute, useFetch } from '#imports';
 import { API_BASE_URL } from '~/constants';
-import { GetArticleResponse, GetArticleCommentsResponse } from '~/types';
+import {
+  GetArticleResponse,
+  GetArticleCommentsResponse,
+} from '~/lib/api/article';
 
 const route = useRoute();
 const slug = route.params.slug as string;
@@ -26,7 +29,6 @@ const { data: commentsData, pending: commentsPending } =
 <template>
   <div>
     <Head>
-      <!-- TODO: display dynamic and use the constant -->
       <title>
         {{
           articleData && articleData.article
@@ -63,7 +65,10 @@ const { data: commentsData, pending: commentsPending } =
       <hr />
 
       <p v-if="commentsPending">Loading article comments...</p>
-      <div v-else-if="commentsData" class="comments w-full md:w-2/3 md:mx-auto">
+      <div
+        v-else-if="commentsData && commentsData.comments.length > 0"
+        class="comments w-full md:w-2/3 md:mx-auto"
+      >
         <ArticleComment
           v-for="comment in commentsData.comments"
           :key="comment.id"
@@ -71,6 +76,7 @@ const { data: commentsData, pending: commentsPending } =
           :article-comment="comment"
         />
       </div>
+      <p v-else>There are no comments yet...</p>
     </TheContainer>
   </div>
 </template>

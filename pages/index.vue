@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, useFetch, useRoute } from '#imports';
 import { API_BASE_URL } from '~/constants';
-import { GetArticlesResponse } from '~/types';
+import { GetArticlesResponse } from '~/lib/api/article';
 
 const route = useRoute();
 
