@@ -15,7 +15,7 @@ const props = defineProps<{
   <div class="jumbotron w-full justify-center items-center">
     <TheContainer>
       <h1>{{ title }}</h1>
-      <UserAvatar :image="authorImage" />
+      <UserAvatar :image="authorImage" class="avatar" />
       <div class="article-meta ml-4">
         <ul>
           <li>{{ authorName }}</li>
@@ -60,5 +60,9 @@ p {
 .article-meta {
   display: inline-block;
   vertical-align: middle;
+}
+
+.avatar {
+  max-width: 30px;
 }
 </style>
