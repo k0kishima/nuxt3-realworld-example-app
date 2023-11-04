@@ -28,3 +28,26 @@ export const createArticle = (
     body: { article: dto },
   });
 };
+
+export type CreateArticleCommentRequest =
+  paths['/articles/{slug}/comments']['post']['requestBody']['content']['application/json'];
+export type CreateArticleCommentResponse =
+  paths['/articles/{slug}/comments']['post']['responses']['200']['content']['application/json'];
+
+export const createArticleComment = (
+  token: string,
+  articleSlug: string,
+  comment: string
+) => {
+  return $fetch<CreateArticleCommentResponse>(
+    `${API_BASE_URL}/articles/${articleSlug}/comments`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${encodeURIComponent(token)}`,
+      },
+      body: { comment: { body: comment } },
+    }
+  );
+};
