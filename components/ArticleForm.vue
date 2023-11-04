@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import * as zod from 'zod';
 import { defineProps } from 'vue';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
-import * as zod from 'zod';
 import { ref, navigateTo } from '#imports';
 import { createArticle } from '~/lib/api/article';
 import { User } from '~/types';
