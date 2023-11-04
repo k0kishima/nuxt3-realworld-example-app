@@ -10,10 +10,11 @@ const props = defineProps<{
   };
 }>();
 </script>
+
 <template>
   <div class="jumbotron w-full justify-center items-center">
     <TheContainer>
-      <img :src="user.image" alt="User's profile image" />
+      <UserAvatar :image="user.image" class="avatar" />
       <h4>{{ user.username }}</h4>
       <p>{{ user.bio }}</p>
       <NuxtLink href="/user/settings" class="user-setting-button"
@@ -37,13 +38,10 @@ const props = defineProps<{
   display: block;
 }
 
-img {
+.avatar {
   width: 100px;
   height: 100px;
-  border-radius: 100px;
   margin-bottom: 1rem;
-  border: 0;
-  display: inline-block;
 }
 
 h4 {

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { APP_NAME } from '~/constants';
 const title = APP_NAME.toLocaleLowerCase();
 </script>
