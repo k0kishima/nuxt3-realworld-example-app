@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useRoute, useFetch } from '#imports';
+import { useRoute, useFetch, ref, watchEffect } from '#imports';
+import { authStore } from '~/stores/auth';
 import { API_BASE_URL } from '~/constants';
 import {
   GetArticleResponse,
@@ -8,6 +9,24 @@ import {
 
 const route = useRoute();
 const slug = route.params.slug as string;
+const auth = authStore();
+
+const commentsData = ref<GetArticleCommentsResponse | null>(null);
+
+const fetchComments = () => {
+  const { data } = useFetch<GetArticleCommentsResponse>(
+    new URL(`${API_BASE_URL}/articles/${slug}/comments`).toString(),
+    {
+      method: 'GET',
+    }
+  );
+
+  watchEffect(() => {
+    commentsData.value = data.value;
+  });
+};
+
+fetchComments();
 
 const { data: articleData, pending: articlePending } =
   useFetch<GetArticleResponse>(
@@ -17,13 +36,9 @@ const { data: articleData, pending: articlePending } =
     }
   );
 
-const { data: commentsData, pending: commentsPending } =
-  useFetch<GetArticleCommentsResponse>(
-    new URL(`${API_BASE_URL}/articles/${slug}/comments`).toString(),
-    {
-      method: 'GET',
-    }
-  );
+const handleCommentCreate = () => {
+  fetchComments();
+};
 </script>
 
 <template>
@@ -64,9 +79,24 @@ const { data: commentsData, pending: commentsPending } =
 
       <hr />
 
-      <p v-if="commentsPending">Loading article comments...</p>
       <div
-        v-else-if="commentsData && commentsData.comments.length > 0"
+        v-if="
+          articleData &&
+          articleData.article &&
+          auth.isAuthenticated &&
+          auth.currentUser
+        "
+        class="comments w-full md:w-2/3 md:mx-auto mb-12"
+      >
+        <ArticleCommentForm
+          :author="auth.currentUser"
+          :article-slug="articleData.article.slug"
+          @create:article-comment="handleCommentCreate"
+        />
+      </div>
+
+      <div
+        v-if="commentsData && commentsData.comments.length > 0"
         class="comments w-full md:w-2/3 md:mx-auto"
       >
         <ArticleComment
