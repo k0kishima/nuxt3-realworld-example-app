@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
+import { formatLongDate } from '~/utils/dateUtils';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   title: string;
   authorName: string;
   authorImage: string;
+  date: string;
 }>();
 </script>
 
@@ -13,8 +15,13 @@ const props = defineProps<{
   <div class="jumbotron w-full justify-center items-center">
     <TheContainer>
       <h1>{{ title }}</h1>
-      <UserAvatar :image="authorImage" class="mr-4" />
-      <span>{{ authorName }}</span>
+      <UserAvatar :image="authorImage" />
+      <div class="article-meta ml-4">
+        <ul>
+          <li>{{ authorName }}</li>
+          <li>{{ formatLongDate(date) }}</li>
+        </ul>
+      </div>
     </TheContainer>
   </div>
 </template>
@@ -48,5 +55,10 @@ p {
   max-width: 450px;
   font-weight: 300;
   padding-bottom: 0.5rem;
+}
+
+.article-meta {
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>
