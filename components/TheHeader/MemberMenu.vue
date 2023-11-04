@@ -12,7 +12,14 @@ const route = useRoute();
         Home
       </NuxtLink>
     </li>
-    <li><a>New Article</a></li>
+    <li>
+      <NuxtLink
+        href="/editor/new"
+        :class="{ active: route.name === 'editor-new' }"
+      >
+        New Article
+      </NuxtLink>
+    </li>
     <li>
       <NuxtLink
         href="/user/settings"
@@ -23,7 +30,7 @@ const route = useRoute();
     </li>
     <li>
       <NuxtLink
-        :to="'/@' + auth.currentUser?.username"
+        :href="'/@' + auth.currentUser?.username"
         :class="{ active: route.name === `@${auth.currentUser?.username}` }"
       >
         {{ auth.currentUser?.username }}
