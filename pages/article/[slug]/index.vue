@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useRoute, useFetch } from '#imports';
 import { API_BASE_URL } from '~/constants';
-import { GetArticleResponse, GetArticleCommentsResponse } from '~/types';
+import {
+  GetArticleResponse,
+  GetArticleCommentsResponse,
+} from '~/lib/api/article';
 
 const route = useRoute();
 const slug = route.params.slug as string;

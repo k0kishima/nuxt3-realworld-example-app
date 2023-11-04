@@ -2,7 +2,7 @@
 import { useRoute, ref, useFetch, computed } from '#imports';
 import { authStore } from '~/stores/auth';
 import { API_BASE_URL } from '~/constants';
-import { GetArticlesResponse } from '~/types';
+import { GetArticlesResponse } from '~/lib/api/article';
 
 const route = useRoute();
 const userName = route.params.userName;
