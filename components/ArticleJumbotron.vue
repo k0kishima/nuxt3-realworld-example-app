@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import { APP_NAME } from '~/constants';
-const title = APP_NAME.toLocaleLowerCase();
+import { defineProps } from 'vue';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const props = defineProps<{
+  title: string;
+  authorName: string;
+  authorImage: string;
+}>();
 </script>
 
 <template>
   <div class="jumbotron w-full justify-center items-center">
     <TheContainer>
       <h1>{{ title }}</h1>
-      <p>A place to share your knowledge.</p>
+      <UserAvatar :image="authorImage" class="mr-4" />
+      <span>{{ authorName }}</span>
     </TheContainer>
   </div>
 </template>
 
 <style scoped>
 .jumbotron {
-  text-align: center;
-  padding: 0.5rem 0 0.5rem 0;
+  padding: 2rem;
   overflow: auto;
   color: #fff;
-  background: #5cb85c;
+  background: #333;
   box-shadow:
     inset 0 8px 8px -8px rgba(0, 0, 0, 0.3),
     inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
@@ -31,11 +37,10 @@ const title = APP_NAME.toLocaleLowerCase();
 }
 
 h1 {
-  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-  font-weight: 700 !important;
-  text-align: center;
-  font-size: 3.5rem;
-  padding-bottom: 0.5rem;
+  font-size: 2.8rem;
+  font-weight: 600;
+  line-height: 1.1em;
+  margin-bottom: 2rem;
 }
 
 p {
