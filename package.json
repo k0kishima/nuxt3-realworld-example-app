@@ -13,7 +13,7 @@
     "generate:api": "npx openapi-typescript openapi.yml --output openapi.gen.ts"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,css,scss,vue}": [
+    "*.{ts,vue}": [
       "sh -c 'if ! echo $1 | grep -E \".gen.ts$\"; then npm run format $1 && npm run lint $1; fi' --"
     ]
   },
