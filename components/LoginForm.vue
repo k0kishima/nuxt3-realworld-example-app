@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import * as zod from 'zod';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
-import * as zod from 'zod';
 import { authStore } from '~/stores/auth';
 import { login } from '~/lib/api/auth';
 import { ref, navigateTo } from '#imports';
@@ -53,71 +53,40 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <form @submit="onSubmit">
-    <fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <input v-model="email" name="email" type="email" placeholder="Email" />
-        <span class="error">{{ errors.email }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
+    <fieldset class="space-y-4">
+      <div
+        class="form-group"
+        :class="{ 'opacity-50 pointer-events-none': isSubmitting }"
+      >
+        <input
+          v-model="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          class="w-full px-6 py-3 text-base leading-5 text-gray-600 bg-white border border-gray-300 rounded-md"
+        />
+        <span class="text-red-500">{{ errors.email }}</span>
+      </div>
+      <div
+        class="form-group"
+        :class="{ 'opacity-50 pointer-events-none': isSubmitting }"
+      >
         <input
           v-model="password"
           name="password"
           type="password"
           placeholder="Password"
+          class="w-full px-6 py-3 text-base leading-5 text-gray-600 bg-white border border-gray-300 rounded-md"
         />
-        <span class="error">{{ errors.password }}</span>
-      </fieldset>
-      <button :disabled="isSubmitting">Sign in</button>
+        <span class="text-red-500">{{ errors.password }}</span>
+      </div>
+      <button
+        :disabled="isSubmitting"
+        class="float-right px-6 py-3 text-base text-white bg-custom-green border border-custom-green rounded-md hover:bg-green-600"
+        :class="{ 'bg-gray-300 cursor-not-allowed': isSubmitting }"
+      >
+        Sign in
+      </button>
     </fieldset>
   </form>
 </template>
-
-<style scoped>
-fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-input {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #55595c;
-  background-color: #fff;
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
-}
-
-.error {
-  color: red;
-}
-
-button {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-  border-radius: 0.3rem;
-}
-
-fieldset:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-</style>

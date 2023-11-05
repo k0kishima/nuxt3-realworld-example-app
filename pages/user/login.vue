@@ -1,39 +1,26 @@
+<script setup>
+import { APP_NAME } from '~/constants';
+</script>
+
 <template>
   <div>
     <Head>
-      <!-- TODO: display dynamic and use the constant -->
-      <title>Login — Conduit</title>
+      <title>Login — {{ APP_NAME }}</title>
     </Head>
 
-    <div class="container">
-      <TheContainer>
-        <h1>Sign in</h1>
-        <p>
-          <NuxtLink href="/user/register">Need an account?</NuxtLink>
+    <TheContainer>
+      <div class="w-full md:w-1/2 md:mx-auto">
+        <h1 class="text-center text-4xl font-medium mb-2">Sign in</h1>
+        <p class="text-center mb-6">
+          <NuxtLink
+            href="/user/register"
+            class="text-custom-green no-underline hover:text-green-600 hover:underline"
+          >
+            Need an account?
+          </NuxtLink>
         </p>
         <LoginForm />
-      </TheContainer>
-    </div>
+      </div>
+    </TheContainer>
   </div>
 </template>
-
-<style scoped>
-.container {
-  margin: 0 auto;
-  width: 60%;
-}
-
-h1 {
-  font-size: 2.5rem;
-  text-align: center;
-}
-
-p {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  a {
-    color: #5cb85c;
-    text-decoration: none;
-  }
-}
-</style>
