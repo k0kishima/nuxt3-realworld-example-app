@@ -4,11 +4,5 @@ const title = APP_NAME.toLocaleLowerCase();
 </script>
 
 <template>
-  <span>{{ title }}</span>
+  <span class="font-titillium text-custom-green font-bold">{{ title }}</span>
 </template>
-
-<style scoped>
-span {
-  color: #5cb85c;
-}
-</style>

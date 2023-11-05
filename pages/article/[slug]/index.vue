@@ -62,22 +62,20 @@ const handleCommentCreate = () => {
     />
 
     <TheContainer>
-      <p v-if="articlePending">Loading the article...</p>
+      <p v-if="articlePending" class="mb-8">Loading the article...</p>
       <div v-else-if="articleData && articleData.article">
-        <p class="article-content">{{ articleData.article.body }}</p>
+        <p class="article-content text-lg leading-relaxed mb-8">
+          {{ articleData.article.body }}
+        </p>
 
-        <ul v-if="articleData.article.tagList" class="mb-12">
-          <li
-            v-for="tag in articleData.article.tagList"
-            :key="tag"
-            class="mr-1"
-          >
+        <ul v-if="articleData.article.tagList" class="mb-12 space-x-1">
+          <li class="inline" v-for="tag in articleData.article.tagList" :key="tag">
             <AppTag :name="tag" />
           </li>
         </ul>
       </div>
 
-      <hr />
+      <hr class="my-4 border-t border-gray-200" />
 
       <div
         v-if="
@@ -86,7 +84,7 @@ const handleCommentCreate = () => {
           auth.isAuthenticated &&
           auth.currentUser
         "
-        class="comments w-full md:w-2/3 md:mx-auto mb-12"
+        class="comments w-full md:w-2/3 md:mx-auto mb-12 mt-12"
       >
         <ArticleCommentForm
           :author="auth.currentUser"
@@ -102,7 +100,7 @@ const handleCommentCreate = () => {
         <ArticleComment
           v-for="comment in commentsData.comments"
           :key="comment.id"
-          class="comment"
+          class="comment mb-4"
           :article-comment="comment"
         />
       </div>
@@ -110,32 +108,3 @@ const handleCommentCreate = () => {
     </TheContainer>
   </div>
 </template>
-
-<style scoped>
-.article-content {
-  font-family: 'source serif pro', serif;
-  font-size: 1.2rem;
-  line-height: 1.8rem;
-  margin-bottom: 2rem;
-}
-
-ul li {
-  display: inline-block;
-}
-
-hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: content-box;
-  height: 0;
-}
-
-.comments {
-  margin-top: 3rem;
-}
-.comment {
-  margin-bottom: 1rem;
-}
-</style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute, ref, useFetch, computed } from '#imports';
 import { authStore } from '~/stores/auth';
-import { API_BASE_URL } from '~/constants';
+import { API_BASE_URL, APP_NAME } from '~/constants';
 import { GetArticlesResponse } from '~/lib/api/article';
 
 const route = useRoute();
@@ -55,54 +55,37 @@ const { data, pending } = useFetch<GetArticlesResponse>(apiUrl, {
 <template>
   <div>
     <Head>
-      <!-- TODO: display dynamic and use the constant -->
-      <title>{{ userName }} — Conduit</title>
+      <title>{{ userName }} — {{ APP_NAME }}</title>
     </Head>
 
     <UserJumbotron :user="user" />
 
     <TheContainer>
-      <TabbedMenu
-        :tabs="menuTabs"
-        :active-tab="currentTab"
-        @update:active-tab="handleActiveTabChange"
-      />
-      <div>
-        <p v-if="pending">Loading articles...</p>
-        <div v-else>
-          <p v-if="data && data.articles && data.articles.length === 0">
-            No articles are here... yet.
-          </p>
-          <div v-else-if="data && data.articles">
-            <ArticleList :articles="data.articles" />
-            <CustomPagination
-              :base-url="`/@${userName}`"
-              :entity-count="data.articlesCount"
-            />
+      <div class="w-full md:w-4/5 md:mx-auto">
+        <TabbedMenu
+          :tabs="menuTabs"
+          :active-tab="currentTab"
+          @update:active-tab="handleActiveTabChange"
+        />
+        <div>
+          <p v-if="pending" class="text-center">Loading articles...</p>
+          <div v-else>
+            <p
+              v-if="data && data.articles && data.articles.length === 0"
+              class="text-center mb-4"
+            >
+              No articles are here... yet.
+            </p>
+            <div v-else-if="data && data.articles">
+              <ArticleList :articles="data.articles" />
+              <CustomPagination
+                :base-url="`/@${userName}`"
+                :entity-count="data.articlesCount"
+              />
+            </div>
           </div>
         </div>
       </div>
     </TheContainer>
   </div>
 </template>
-
-<style scoped>
-.container {
-  margin: 0 auto;
-  width: 60%;
-}
-
-h1 {
-  font-size: 2.5rem;
-  text-align: center;
-}
-
-p {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  a {
-    color: #5cb85c;
-    text-decoration: none;
-  }
-}
-</style>

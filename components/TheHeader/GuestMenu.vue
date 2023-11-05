@@ -1,54 +1,24 @@
 <script setup lang="ts">
 import { useRoute } from '#imports';
 const route = useRoute();
+
+const menuItems = [
+  { name: 'Home', href: '/', routeName: 'index' },
+  { name: 'Sign in', href: '/user/login', routeName: 'user-login' },
+  { name: 'Sign up', href: '/user/register', routeName: 'user-register' },
+];
 </script>
+
 <template>
-  <ul>
-    <li>
-      <NuxtLink href="/" :class="{ active: route.name === 'index' }"
-        >Home</NuxtLink
-      >
-    </li>
-    <li>
+  <ul class="list-none">
+    <li v-for="item in menuItems" :key="item.name" class="float-left text-sm">
       <NuxtLink
-        href="/user/login"
-        :class="{ active: route.name === 'user-login' }"
-        >Sign in</NuxtLink
+        :href="item.href"
+        class="block py-1 px-2 text-gray-500 hover:text-gray-800"
+        :class="{ 'text-gray-800': route.name === item.routeName }"
       >
-    </li>
-    <li>
-      <NuxtLink
-        href="/user/register"
-        :class="{ active: route.name === 'user-register' }"
-        >Sign up</NuxtLink
-      >
+        {{ item.name }}
+      </NuxtLink>
     </li>
   </ul>
 </template>
-
-<style scoped>
-ul {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-}
-
-li {
-  float: left;
-}
-
-li + li {
-  margin-left: 1rem;
-}
-
-a {
-  color: rgba(0, 0, 0, 0.3);
-  display: block;
-  padding-top: 0.425rem;
-  padding-bottom: 0.425rem;
-}
-
-.active {
-  color: rgba(0, 0, 0, 0.8);
-}
-</style>

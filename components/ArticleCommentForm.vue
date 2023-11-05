@@ -55,23 +55,28 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <form @submit="onSubmit">
-    <fieldset>
-      <div class="card">
-        <div class="card-block">
-          <fieldset class="form-group" :disabled="isSubmitting">
-            <textarea
-              v-model="body"
-              name="body"
-              placeholder="Write a comment..."
-              rows="4"
-              class="textarea"
-            ></textarea>
-            <span class="error">{{ errors.body }}</span>
-          </fieldset>
+    <fieldset class="w-full p-0 m-0 border-0">
+      <div class="border border-gray-300">
+        <div>
+          <textarea
+            v-model="body"
+            name="body"
+            placeholder="Write a comment..."
+            rows="4"
+            class="w-full p-3 text-base leading-normal bg-white border rounded resize-y"
+            :class="{ 'opacity-50 pointer-events-none': isSubmitting }"
+          ></textarea>
+          <span class="text-red-500">{{ errors.body }}</span>
         </div>
-        <div class="card-footer">
-          <UserAvatar :image="author.image" class="avatar" />
-          <button :disabled="isSubmitting" class="float-right">
+        <div
+          class="p-3 bg-gray-100 border-t border-gray-300 text-sm font-light flex items-center"
+        >
+          <UserAvatar :image="author.image" class="w-8 h-8 mr-4" />
+          <button
+            :disabled="isSubmitting"
+            class="float-right p-2 text-xs font-bold text-white bg-custom-green border border-custom-green rounded hover:bg-green-600"
+            :class="{ 'bg-gray-300 cursor-not-allowed': isSubmitting }"
+          >
             Post Comment
           </button>
         </div>
@@ -79,73 +84,3 @@ const onSubmit = handleSubmit(async (values) => {
     </fieldset>
   </form>
 </template>
-
-<style scoped>
-fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-textarea {
-  border: 0;
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #55595c;
-  background-color: #fff;
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.error {
-  color: red;
-}
-
-button {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  border-radius: 0.2rem;
-}
-
-fieldset:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.textarea {
-  resize: vertical;
-}
-
-.card {
-  border: 1px solid #e5e5e5;
-}
-.card-block p {
-  padding: 1.25rem;
-}
-
-.card-footer {
-  padding: 0.75rem 1.25rem;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e5e5e5;
-  box-shadow: none !important;
-  font-size: 0.8rem;
-  font-weight: 300;
-}
-
-.avatar {
-  max-width: 30px;
-}
-</style>

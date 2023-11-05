@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import * as zod from 'zod';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
-import * as zod from 'zod';
 import { authStore } from '~/stores/auth';
 import { updateUser } from '~/lib/api/user';
 import { ref, navigateTo } from '#imports';
@@ -62,102 +62,75 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
-    <fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <input
-          v-model="image"
-          name="image"
-          type="url"
-          placeholder="URL of profile picture"
-        />
-        <span class="error">{{ errors.image }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <textarea
-          v-model="bio"
-          name="bio"
-          placeholder="Short bio about you"
-          rows="8"
-        />
-        <span class="error">{{ errors.bio }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <input
-          v-model="username"
-          name="username"
-          type="text"
-          placeholder="Username"
-        />
-        <span class="error">{{ errors.username }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <input v-model="email" name="email" type="email" placeholder="Email" />
-        <span class="error">{{ errors.email }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
-        <input
-          v-model="password"
-          name="password"
-          type="password"
-          placeholder="New Password"
-        />
-        <span class="error">{{ errors.password }}</span>
-      </fieldset>
-      <button :disabled="isSubmitting" class="float-right">
+  <form class="space-y-4" @submit.prevent="onSubmit">
+    <fieldset :disabled="isSubmitting" class="flex flex-col space-y-2">
+      <input
+        v-model="image"
+        name="image"
+        type="url"
+        placeholder="URL of profile picture"
+        class="input-field"
+      />
+      <span class="text-red-500">{{ errors.image }}</span>
+    </fieldset>
+    <fieldset :disabled="isSubmitting" class="flex flex-col space-y-2">
+      <textarea
+        v-model="bio"
+        name="bio"
+        placeholder="Short bio about you"
+        rows="8"
+        class="input-field resize-y"
+      />
+      <span class="text-red-500">{{ errors.bio }}</span>
+    </fieldset>
+    <fieldset :disabled="isSubmitting" class="flex flex-col space-y-2">
+      <input
+        v-model="username"
+        name="username"
+        type="text"
+        placeholder="Username"
+        class="input-field"
+      />
+      <span class="text-red-500">{{ errors.username }}</span>
+    </fieldset>
+    <fieldset :disabled="isSubmitting" class="flex flex-col space-y-2">
+      <input
+        v-model="email"
+        name="email"
+        type="email"
+        placeholder="Email"
+        class="input-field"
+      />
+      <span class="text-red-500">{{ errors.email }}</span>
+    </fieldset>
+    <fieldset :disabled="isSubmitting" class="flex flex-col space-y-2">
+      <input
+        v-model="password"
+        name="password"
+        type="password"
+        placeholder="New Password"
+        class="input-field"
+      />
+      <span class="text-red-500">{{ errors.password }}</span>
+    </fieldset>
+    <div class="flex justify-end">
+      <button
+        :disabled="isSubmitting"
+        class="float-right px-6 py-3 text-base text-white bg-custom-green border border-custom-green rounded-md hover:bg-green-600"
+        :class="{ 'bg-gray-300 cursor-not-allowed': isSubmitting }"
+      >
         Update Settings
       </button>
-    </fieldset>
+    </div>
   </form>
 </template>
 
 <style scoped>
-fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #55595c;
-  background-color: #fff;
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
-}
-
-.error {
-  color: red;
-}
-
-button {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-  border-radius: 0.3rem;
+.input-field {
+  @apply block w-full py-3 px-4 text-base leading-normal bg-white text-gray-700 border border-gray-300 rounded;
 }
 
 fieldset:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  @apply opacity-50 pointer-events-none;
 }
 </style>
