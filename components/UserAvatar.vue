@@ -8,13 +8,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <img :src="image" alt="User's profile image" />
+  <img
+    :src="image"
+    alt="User's profile image"
+    class="rounded-full border-0 inline-block"
+  />
 </template>
-
-<style scoped>
-img {
-  border-radius: 100px;
-  border: 0;
-  display: inline-block;
-}
-</style>
