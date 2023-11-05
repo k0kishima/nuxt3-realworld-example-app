@@ -10,53 +10,20 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-block">
-      <p>{{ articleComment.body }}</p>
-    </div>
-    <div class="card-footer">
-      <UserAvatar :image="articleComment.author.image" />
-      <div class="comment-meta ml-4">
-        <ul>
-          <li>{{ articleComment.author.username }}</li>
-          <li>
-            <span class="date-posted">{{
-              formatLongDate(articleComment.createdAt)
-            }}</span>
+  <div class="border border-gray-200 rounded">
+    <p class="p-4 text-sm">{{ articleComment.body }}</p>
+    <div
+      class="p-2 text-sm bg-gray-50 border-t border-gray-200 font-light flex items-center"
+    >
+      <UserAvatar :image="articleComment.author.image" class="mr-4" />
+      <div class="comment-meta text-xs">
+        <ul class="list-inside list-disc inline">
+          <li class="inline">{{ articleComment.author.username }}</li>
+          <li class="inline ml-2 text-gray-400">
+            {{ formatLongDate(articleComment.createdAt) }}
           </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.card {
-  border: 1px solid #e5e5e5;
-}
-.card-block p {
-  padding: 1.25rem;
-}
-
-.card-footer {
-  padding: 0.75rem 1.25rem;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e5e5e5;
-  box-shadow: none !important;
-  font-size: 0.8rem;
-  font-weight: 300;
-}
-
-.card-footer li {
-  display: inline;
-}
-
-.comment-meta {
-  display: inline-block;
-  vertical-align: middle;
-}
-.date-posted {
-  margin-left: 10px;
-  color: #bbb;
-}
-</style>

@@ -12,12 +12,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="jumbotron w-full justify-center items-center">
+  <div class="p-8 overflow-auto text-white bg-zinc-700 shadow-inner">
     <TheContainer>
-      <h1>{{ title }}</h1>
-      <UserAvatar :image="authorImage" class="avatar" />
-      <div class="article-meta ml-4">
-        <ul>
+      <h1 class="text-4xl font-semibold mb-8">{{ title }}</h1>
+      <UserAvatar :image="authorImage" class="w-8 h-8" />
+      <div class="article-meta ml-4 inline-block align-middle">
+        <ul class="list-inside">
           <li>{{ authorName }}</li>
           <li>{{ formatLongDate(date) }}</li>
         </ul>
@@ -25,44 +25,3 @@ const props = defineProps<{
     </TheContainer>
   </div>
 </template>
-
-<style scoped>
-.jumbotron {
-  padding: 2rem;
-  overflow: auto;
-  color: #fff;
-  background: #333;
-  box-shadow:
-    inset 0 8px 8px -8px rgba(0, 0, 0, 0.3),
-    inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
-}
-.jumbotron:after,
-.jumbotron:before {
-  content: '';
-  clear: both;
-  display: block;
-}
-
-h1 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  line-height: 1.1em;
-  margin-bottom: 2rem;
-}
-
-p {
-  margin: 0 auto 0.5rem;
-  max-width: 450px;
-  font-weight: 300;
-  padding-bottom: 0.5rem;
-}
-
-.article-meta {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.avatar {
-  max-width: 30px;
-}
-</style>
