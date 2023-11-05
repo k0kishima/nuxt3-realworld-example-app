@@ -57,103 +57,55 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <form @submit="onSubmit">
-    <fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
+  <form class="space-y-4" @submit="onSubmit">
+    <fieldset :disabled="isSubmitting" class="space-y-4">
+      <div class="mb-4">
         <input
           v-model="title"
           name="title"
           type="text"
           placeholder="Article Title"
+          class="block w-full p-3 text-base text-gray-700 bg-white border border-gray-300 rounded"
         />
-        <span class="error">{{ errors.title }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
+        <span class="text-red-500">{{ errors.title }}</span>
+      </div>
+      <div class="mb-4">
         <input
           v-model="description"
           name="description"
           type="text"
           placeholder="What's this article about?"
+          class="block w-full p-3 text-base text-gray-700 bg-white border border-gray-300 rounded"
         />
-        <span class="error">{{ errors.description }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
+        <span class="text-red-500">{{ errors.description }}</span>
+      </div>
+      <div class="mb-4">
         <textarea
           v-model="body"
           name="body"
           placeholder="Write your article..."
           rows="8"
-          class="textarea"
+          class="block w-full p-3 text-base text-gray-700 bg-white border border-gray-300 rounded resize-y"
         ></textarea>
-        <span class="error">{{ errors.body }}</span>
-      </fieldset>
-      <fieldset class="form-group" :disabled="isSubmitting">
+        <span class="text-red-500">{{ errors.body }}</span>
+      </div>
+      <div class="mb-4">
         <input
           v-model="tags"
           name="tags"
           type="text"
           placeholder="Enter tags"
+          class="block w-full p-3 text-base text-gray-700 bg-white border border-gray-300 rounded"
         />
-        <span class="error">{{ errors.tags }}</span>
-      </fieldset>
-      <button :disabled="isSubmitting" class="float-right">
+        <span class="text-red-500">{{ errors.tags }}</span>
+      </div>
+      <button
+        :disabled="isSubmitting"
+        class="float-right px-6 py-3 text-base text-white bg-custom-green border border-custom-green rounded-md hover:bg-green-600"
+        :class="{ 'bg-gray-300 cursor-not-allowed': isSubmitting }"
+      >
         Publish Article
       </button>
     </fieldset>
   </form>
 </template>
-
-<style scoped>
-fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.25;
-  color: #55595c;
-  background-color: #fff;
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
-}
-
-.error {
-  color: red;
-}
-
-button {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-  border-radius: 0.3rem;
-}
-
-fieldset:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.textarea {
-  resize: vertical; /* 縦方向のリサイズのみ許可 */
-}
-</style>
