@@ -14,8 +14,6 @@ const props = defineProps<{
 <style scoped>
 .app-tag {
   border: 1px solid #ddd;
-  color: #aaa;
-  background: 0 0;
   font-size: 0.8rem;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;

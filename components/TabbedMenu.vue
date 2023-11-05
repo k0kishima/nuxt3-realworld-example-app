@@ -28,62 +28,25 @@ const setActiveTab = (tabLabel: string) => {
 <template>
   <div class="switchable">
     <ul>
-      <li v-for="tab in tabs" :key="tab.label">
+      <li v-for="tab in tabs" :key="tab.label" class="list-none float-left">
         <NuxtLink
           :href="tab.href"
-          :class="{ active: isActiveTab(tab) }"
+          class="text-sm leading-6 box-border no-underline block px-4 py-2 rounded-none"
+          :class="
+            isActiveTab(tab)
+              ? 'bg-white border-b-2 border-custom-green text-custom-green'
+              : 'text-gray-400 border-none border-transparent bg-transparent'
+          "
           @click="setActiveTab(tab.label)"
-          >{{ tab.label }}</NuxtLink
         >
+          {{ tab.label }}
+        </NuxtLink>
       </li>
     </ul>
   </div>
 </template>
 
 <style scoped>
-.switchable {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  box-sizing: inherit;
-  margin: 1.5rem 0 -1px 0;
-
-  ul {
-    font-size: 1rem;
-    line-height: 1.5;
-    box-sizing: inherit;
-    list-style: none;
-
-    li {
-      font-size: 1rem;
-      line-height: 1.5;
-      list-style: none;
-      box-sizing: inherit;
-      float: left;
-
-      a {
-        font-size: 1rem;
-        line-height: 1.5;
-        list-style: none;
-        box-sizing: inherit;
-        text-decoration: none;
-        touch-action: manipulation;
-        display: block;
-        padding: 0.5em 1em;
-        border-radius: 0px;
-        border: none;
-        border-bottom: 2px solid transparent;
-        background: transparent;
-        color: #aaa;
-      }
-      .active {
-        background: #fff;
-        border-bottom: 2px solid #5cb85c;
-        color: #5cb85c;
-      }
-    }
-  }
-}
 .switchable:after,
 .switchable:before {
   content: '';
