@@ -4,9 +4,9 @@ const auth = authStore();
 </script>
 
 <template>
-  <header>
-    <nav>
-      <div class="container">
+  <header class="sticky top-0 bg-white z-10 p-0.5">
+    <nav class="relative py-2 px-4">
+      <div class="container mx-auto px-4 flex justify-between">
         <div class="logo">
           <TheHeaderAppLogo />
         </div>
@@ -20,33 +20,6 @@ const auth = authStore();
 </template>
 
 <style scoped>
-header {
-  top: 0;
-  position: sticky;
-  background-color: #fff;
-  z-index: 1;
-}
-
-nav {
-  border-radius: 0.25rem;
-  position: relative;
-  padding: 0.5rem 1rem;
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.container:after,
-.container:before {
-  content: '';
-  clear: both;
-  display: block;
-}
-
 @media (min-width: 544px) {
   .container {
     max-width: 576px;
@@ -69,13 +42,5 @@ nav {
   .container {
     max-width: 1140px;
   }
-}
-
-.logo {
-  float: left;
-}
-
-.menu {
-  float: right;
 }
 </style>
