@@ -1,33 +1,23 @@
 <template>
-  <footer>
-    <div class="container">
-      <div class="logo">
+  <footer class="bg-gray-100 mt-12 py-4 w-full">
+    <div class="container mx-auto px-4">
+      <div class="logo inline-block align-middle">
         <TheFooterAppLogo />
       </div>
 
-      <span class="attribution">
+      <span
+        class="attribution align-middle ml-2 text-xs text-gray-400 font-light"
+      >
         © 2023. An interactive learning project from
-        <a href="https://thinkster.io">Thinkster</a>. Code licensed under MIT.
+        <a href="https://thinkster.io" class="text-custom-green no-underline">
+          Thinkster </a
+        >. Code licensed under MIT.
       </span>
     </div>
   </footer>
 </template>
 
 <style scoped>
-footer {
-  background: #f3f3f3;
-  margin-top: 3rem;
-  padding: 1rem 0;
-  width: 100%;
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 @media (min-width: 544px) {
   .container {
     max-width: 576px;
@@ -49,24 +39,6 @@ footer {
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
-  }
-}
-
-.logo {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.attribution {
-  vertical-align: middle;
-  margin-left: 10px;
-  font-size: 0.8rem;
-  color: #bbb;
-  font-weight: 300;
-
-  a {
-    color: #5cb85c;
-    text-decoration: none;
   }
 }
 </style>
