@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, useFetch, useRoute } from '#imports';
-import { API_BASE_URL } from '~/constants';
+import { API_BASE_URL, APP_NAME } from '~/constants';
 import { GetArticlesResponse } from '~/lib/api/article';
 import { GetTagsResponse } from '~/lib/api/tag';
 
@@ -52,8 +52,7 @@ const { data: tagData, pending: tagPending } = useFetch<GetTagsResponse>(
 <template>
   <div>
     <Head>
-      <!-- TODO: display dynamic and use the constant -->
-      <title>Home — Conduit</title>
+      <title>Home — {{ APP_NAME }}</title>
     </Head>
 
     <AppJumbotron />
