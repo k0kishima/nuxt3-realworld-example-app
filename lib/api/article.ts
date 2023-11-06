@@ -51,3 +51,36 @@ export const createArticleComment = (
     }
   );
 };
+
+export type AddArticleToFavoritesRequest =
+  paths['/articles/{slug}/favorite']['post']['responses']['200']['content']['application/json'];
+export const addArticleToFavorites = (token: string, articleSlug: string) => {
+  return $fetch<AddArticleToFavoritesRequest>(
+    `${API_BASE_URL}/articles/${articleSlug}/favorite`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${encodeURIComponent(token)}`,
+      },
+    }
+  );
+};
+
+export type RemoveArticleFromFavoritesRequest =
+  paths['/articles/{slug}/favorite']['delete']['responses']['200']['content']['application/json'];
+export const removeArticleFromFavorites = (
+  token: string,
+  articleSlug: string
+) => {
+  return $fetch<RemoveArticleFromFavoritesRequest>(
+    `${API_BASE_URL}/articles/${articleSlug}/favorite`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${encodeURIComponent(token)}`,
+      },
+    }
+  );
+};

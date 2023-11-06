@@ -38,11 +38,11 @@ const props = defineProps<{
         </div>
 
         <div class="float-right">
-          <button
-            class="inline-block font-normal align-middle border rounded text-xs px-2 py-1 bg-green-500 border-green-500 text-white"
-          >
-            <i class="ion-heart"></i> {{ article.favoritesCount }}
-          </button>
+          <FavoriteButton
+            :favorites-count="article.favoritesCount"
+            :active="article.favorited"
+            :article-slug="article.slug"
+          />
         </div>
       </div>
 
