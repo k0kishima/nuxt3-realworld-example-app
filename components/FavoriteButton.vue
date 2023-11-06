@@ -1,11 +1,45 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
+import { ref, navigateTo } from '#imports';
+import { authStore } from '~/stores/auth';
+import {
+  addArticleToFavorites,
+  removeArticleFromFavorites,
+} from '~/lib/api/article';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   favoritesCount: number;
   active: boolean;
+  articleSlug: string;
 }>();
+
+const activeState = ref(props.active);
+
+const auth = authStore();
+
+const toggleFavorite = async () => {
+  const token = auth.currentUser?.token;
+  if (!token) {
+    await navigateTo('/user/register');
+    return;
+  }
+
+  if (!activeState.value) {
+    try {
+      await addArticleToFavorites(token, props.articleSlug);
+      activeState.value = true;
+    } catch (error) {
+      // todo: Implement error handling
+    }
+  } else {
+    try {
+      await removeArticleFromFavorites(token, props.articleSlug);
+      activeState.value = false;
+    } catch (error) {
+      // todo: Implement error handling
+    }
+  }
+};
 </script>
 
 <template>
@@ -13,16 +47,17 @@ const props = defineProps<{
     <button
       :class="[
         'inline-flex items-center justify-center border rounded text-xs px-2 py-1',
-        active
+        activeState
           ? 'bg-custom-green text-white'
           : 'border-custom-green bg-white text-custom-green',
       ]"
+      @click="toggleFavorite"
     >
       <span class="inline-flex">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-4 h-4 mr-1"
-          :fill="active ? 'white' : 'currentColor'"
+          :fill="activeState ? 'white' : 'currentColor'"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"

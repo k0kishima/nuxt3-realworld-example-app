@@ -41,6 +41,7 @@ const props = defineProps<{
           <FavoriteButton
             :favorites-count="article.favoritesCount"
             :active="article.favorited"
+            :article-slug="article.slug"
           />
         </div>
       </div>
