@@ -16,10 +16,16 @@ const props = defineProps<{
     <TheContainer>
       <h1 class="text-4xl font-semibold mb-8">{{ title }}</h1>
       <UserAvatar :image="authorImage" class="w-8 h-8" />
-      <div class="article-meta ml-4 inline-block align-middle">
+      <div class="ml-4 inline-block align-middle">
         <ul class="list-inside">
-          <li>{{ authorName }}</li>
-          <li>{{ formatLongDate(date) }}</li>
+          <li class="text-sm font-medium">
+            <NuxtLink
+              :href="`/@${encodeURIComponent(authorName)}`"
+              class="hover:underline"
+              >{{ authorName }}</NuxtLink
+            >
+          </li>
+          <li class="text-xs text-gray-400">{{ formatLongDate(date) }}</li>
         </ul>
       </div>
     </TheContainer>

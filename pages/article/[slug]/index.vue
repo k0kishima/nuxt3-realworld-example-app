@@ -69,7 +69,11 @@ const handleCommentCreate = () => {
         </p>
 
         <ul v-if="articleData.article.tagList" class="mb-12 space-x-1">
-          <li class="inline" v-for="tag in articleData.article.tagList" :key="tag">
+          <li
+            v-for="tag in articleData.article.tagList"
+            :key="tag"
+            class="inline"
+          >
             <AppTag :name="tag" />
           </li>
         </ul>

@@ -16,7 +16,7 @@ const props = defineProps<{
       class="border-t border-gray-200 py-6"
     >
       <div class="font-light mb-4">
-        <a :href="`/profile/${encodeURIComponent(article.author.username)}`">
+        <a :href="`/@${encodeURIComponent(article.author.username)}`">
           <img
             :data-src="article.author.image"
             :src="article.author.image"
@@ -28,7 +28,7 @@ const props = defineProps<{
         <div class="inline-block align-middle mr-6 ml-1">
           <a
             class="author block font-medium text-green-500"
-            :href="`/profile/${encodeURIComponent(article.author.username)}`"
+            :href="`/@${encodeURIComponent(article.author.username)}`"
           >
             <span>{{ article.author.username }}</span>
           </a>
