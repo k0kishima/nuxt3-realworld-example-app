@@ -35,11 +35,17 @@ const props = defineProps<{
         v-if="auth.currentUser?.username !== article.author.username"
         class="ml-4 inline-block align-middle"
       >
+        <FollowButton
+          :username="article.author.username"
+          :active="article.author.following"
+          class="inline-block align-middle"
+        />
         <FavoriteButton
           :favorites-count="article.favoritesCount"
           :active="article.favorited"
           :article-slug="article.slug"
           text="Favorite Article"
+          class="inline-block align-middle ml-1"
         />
       </div>
     </TheContainer>

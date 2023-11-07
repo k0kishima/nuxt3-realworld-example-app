@@ -57,7 +57,7 @@ const toggleFavorite = async () => {
       <span class="inline-flex">
         <IconHeart
           :color="activeState ? 'white' : 'currentColor'"
-          class="w-4 h-4 mr-1"
+          class="w-3 h-3 mr-1"
         />
       </span>
       <div v-if="text">
