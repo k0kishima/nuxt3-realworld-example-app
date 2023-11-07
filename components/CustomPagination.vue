@@ -48,12 +48,14 @@ const buildPaginatedUrl = (page: number) => {
 
 <template>
   <nav>
-    <ul class="pagination">
-      <li v-for="page in totalPages" :key="page" class="pagination-item">
+    <ul class="inline-block">
+      <li v-for="page in totalPages" :key="page" class="inline text-xs">
         <NuxtLink
           :to="buildPaginatedUrl(page)"
-          class="pagination-link"
-          :class="{ 'is-active': currentPage === page }"
+          class="float-left p-3 ml-[-1px] bg-white text-green-500 hover:bg-custom-green hover:text-white border border-gray-300 hover:border-custom-green hover:underline"
+          :class="{
+            '!bg-custom-green text-white cursor-default': currentPage === page,
+          }"
         >
           {{ page }}
         </NuxtLink>
@@ -61,36 +63,3 @@ const buildPaginatedUrl = (page: number) => {
     </ul>
   </nav>
 </template>
-
-<style scoped>
-.pagination {
-  display: inline-block;
-  padding-left: 0;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem;
-}
-
-li {
-  display: inline;
-}
-
-.pagination-link {
-  position: relative;
-  float: left;
-  padding: 0.5rem 0.75rem;
-  margin-left: -1px;
-  color: #5cb85c;
-  text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-.is-active {
-  z-index: 2;
-  color: #fff;
-  cursor: default;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-}
-</style>
