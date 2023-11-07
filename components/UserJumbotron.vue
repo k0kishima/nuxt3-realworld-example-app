@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
+import { authStore } from '~/stores/auth';
+const auth = authStore();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
@@ -21,6 +23,7 @@ const props = defineProps<{
           {{ user.bio }}
         </p>
         <NuxtLink
+          v-if="auth.currentUser?.username === user.username"
           href="/user/settings"
           class="float-right text-gray-600 border border-gray-600 px-2 py-1 text-sm rounded-sm"
         >

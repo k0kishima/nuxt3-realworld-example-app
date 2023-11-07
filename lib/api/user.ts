@@ -39,3 +39,18 @@ export const createUser = (
     },
   });
 };
+
+export type GetUserResponse =
+  paths['/profiles/{username}']['get']['responses']['200']['content']['application/json'];
+
+export const getUser = (username: string) => {
+  return $fetch<GetUserResponse>(
+    `${API_BASE_URL}/profiles/${encodeURIComponent(username)}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+};
