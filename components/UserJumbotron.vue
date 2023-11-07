@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { authStore } from '~/stores/auth';
+
 const auth = authStore();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

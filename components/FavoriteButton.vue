@@ -11,6 +11,7 @@ const props = defineProps<{
   favoritesCount: number;
   active: boolean;
   articleSlug: string;
+  text?: string | null;
 }>();
 
 const activeState = ref(props.active);
@@ -59,7 +60,11 @@ const toggleFavorite = async () => {
           class="w-4 h-4 mr-1"
         />
       </span>
-      {{ favoritesCount }}
+      <div v-if="text">
+        <span class="ml-1">{{ text }}</span>
+        <span class="ml-1">({{ favoritesCount }})</span>
+      </div>
+      <div v-else>{{ favoritesCount }}</div>
     </button>
   </div>
 </template>

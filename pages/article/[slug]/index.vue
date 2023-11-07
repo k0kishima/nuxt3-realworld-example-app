@@ -55,10 +55,7 @@ const handleCommentCreate = () => {
 
     <ArticleJumbotron
       v-if="articleData && articleData.article"
-      :title="articleData.article.title"
-      :author-name="articleData.article.author.username"
-      :author-image="articleData.article.author.image"
-      :date="articleData.article.createdAt"
+      :article="articleData.article"
     />
 
     <TheContainer>
