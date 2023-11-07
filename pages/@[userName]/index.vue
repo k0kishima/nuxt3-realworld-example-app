@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { useRoute, ref, useFetch, computed } from '#imports';
-import { authStore } from '~/stores/auth';
+import { useRoute, ref, useFetch, computed, onMounted } from '#imports';
 import { API_BASE_URL, APP_NAME } from '~/constants';
 import { GetArticlesResponse } from '~/lib/api/article';
+import { getUser, GetUserResponse } from '~/lib/api/user';
 
 const route = useRoute();
 const userName = route.params.userName;
+const user = ref<GetUserResponse['profile'] | null>(null);
 
-const auth = authStore();
-const user = auth.currentUser;
-
-if (user == null) {
-  throw new Error('User is not logged in');
-}
 if (typeof userName !== 'string') {
   throw new TypeError("userName can't be a string");
 }
@@ -24,6 +19,15 @@ const menuTabs = [
 const currentTab = ref(
   route.query.favorited ? 'Favorited Articles' : 'My Article'
 );
+
+onMounted(async () => {
+  try {
+    const { profile } = await getUser(userName);
+    user.value = profile;
+  } catch (error) {
+    // todo: implement error handling
+  }
+});
 
 const handleActiveTabChange = (newActiveTab: string) => {
   currentTab.value = newActiveTab;
@@ -45,10 +49,6 @@ const apiUrl = computed(() => {
 
 const { data, pending } = useFetch<GetArticlesResponse>(apiUrl, {
   method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Token ${encodeURIComponent(user.token)}`,
-  },
 });
 </script>
 
@@ -58,7 +58,7 @@ const { data, pending } = useFetch<GetArticlesResponse>(apiUrl, {
       <title>{{ userName }} — {{ APP_NAME }}</title>
     </Head>
 
-    <UserJumbotron :user="user" />
+    <UserJumbotron v-if="user" :user="user" />
 
     <TheContainer>
       <div class="w-full md:w-4/5 md:mx-auto">
