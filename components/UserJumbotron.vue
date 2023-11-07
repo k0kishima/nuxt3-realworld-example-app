@@ -30,6 +30,12 @@ const props = defineProps<{
         >
           <i class="ion-gear-a"></i> Edit Profile Settings
         </NuxtLink>
+        <FollowButton
+          v-if="auth.currentUser?.username !== user.username"
+          class="float-right"
+          :username="user.username"
+          :active="false"
+        />
       </div>
     </TheContainer>
   </div>

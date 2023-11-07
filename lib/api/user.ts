@@ -54,3 +54,35 @@ export const getUser = (username: string) => {
     }
   );
 };
+
+export type FollowUserResponse =
+  paths['/profiles/{username}/follow']['post']['responses']['200']['content']['application/json'];
+
+export const followUser = (token: string, username: string) => {
+  return $fetch<FollowUserResponse>(
+    `${API_BASE_URL}/profiles/${encodeURIComponent(username)}/follow`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${encodeURIComponent(token)}`,
+      },
+    }
+  );
+};
+
+export type UnfollowUserResponse =
+  paths['/profiles/{username}/follow']['delete']['responses']['200']['content']['application/json'];
+
+export const unfollowUser = (token: string, username: string) => {
+  return $fetch<FollowUserResponse>(
+    `${API_BASE_URL}/profiles/${encodeURIComponent(username)}/follow`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${encodeURIComponent(token)}`,
+      },
+    }
+  );
+};
