@@ -10,6 +10,8 @@ This codebase was created to demonstrate a fully fledged fullstack application b
 
 We've gone to great lengths to adhere to the **[Nuxt3](https://nuxt.com/)** community styleguides & best practices.
 
+You might also check out [the Backend implementation in Golang(Gin/ent)](https://github.com/k0kishima/golang-realworld-example-app).
+
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
 
