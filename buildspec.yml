@@ -6,19 +6,30 @@ phases:
       nodejs: 20
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo "Logging in to Amazon ECR..."
+      - PASSWORD=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
+      - echo "Docker login..."
+      - docker login --username AWS --password $PASSWORD $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Building the Docker image...
+      - echo "Building the Docker image..."
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - echo Tagging the Docker image...
+      - echo "Tagging the Docker image..."
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
-      - echo Pushing the Docker image...
+      - echo "Pushing the Docker image..."
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo Writing image definitions file...
+      - echo "Writing image definitions file..."
       - printf '[{"name":"app","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
+
 artifacts:
-  files: imagedefinitions.json
+  files:
+    - imagedefinitions.json
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "ap-northeast-1"
+    AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+    IMAGE_REPO_NAME: "realworld-example-staging-frontend"
+    IMAGE_TAG: "latest"
