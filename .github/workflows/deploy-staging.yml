@@ -3,29 +3,65 @@ name: Deploy to Staging
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+      actions: read
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-github-actions-role
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Start AWS CodeBuild
+      - name: Login to AWS ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        id: build-image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./deploy
+          file: ./deploy/Dockerfile
+          push: true
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realworld-example-frontend-ecr-repo:latest
+
+      - name: Render task definition from template
+        id: render-task-def
+        run: envsubst < deploy/taskdef-template.json > taskdef.json
+        env:
+          IMAGE_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realworld-example-frontend-ecr-repo:latest
+          PROJECT: realworld-example
+          APP_ENV: staging
+
+      - name: Register ECS task definition
+        id: register-task-def
         run: |
-          aws codebuild start-build --project-name realworld-example-staging-frontend-app-build
+          TASK_DEF_ARN=$(aws ecs register-task-definition \
+            --family realworld-example-staging-task \
+            --execution-role-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-ecs-task-execution-role \
+            --cli-input-json file://taskdef.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)
+          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
 
-      - name: Wait for Build Completion
-        id: build
-        uses: aws-actions/aws-codebuild-run-build@v1
-        with:
-          project-name: realworld-example-staging-frontend-app-build
+      - name: Update ECS service
+        run: |
+          aws ecs update-service --cluster realworld-example-staging-ecs-cluster --service realworld-example-staging-ecs-service --task-definition ${{ env.TASK_DEF_ARN }} --force-new-deployment
