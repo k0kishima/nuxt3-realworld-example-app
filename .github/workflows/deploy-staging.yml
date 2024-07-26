@@ -57,6 +57,7 @@ jobs:
           TASK_DEF_ARN=$(aws ecs register-task-definition \
             --family realworld-example-staging-task \
             --execution-role-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-ecs-task-execution-role \
+            --task-role-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-ecs-task-role \
             --cli-input-json file://taskdef.json \
             --query 'taskDefinition.taskDefinitionArn' \
             --output text)
