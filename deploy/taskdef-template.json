@@ -45,6 +45,5 @@
     "FARGATE"
   ],
   "cpu": "256",
-  "memory": "512",
-  "enableExecuteCommand": true
+  "memory": "512"
 }
