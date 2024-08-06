@@ -7,7 +7,7 @@
   "containerDefinitions": [
     {
       "name": "nginx",
-      "image": "nginx:latest",
+      "image": "${PROXY_IMAGE_URI}",
       "essential": true,
       "portMappings": [
         {
@@ -26,7 +26,7 @@
     },
     {
       "name": "nuxt",
-      "image": "${IMAGE_URI}",
+      "image": "${APP_IMAGE_URI}",
       "essential": true,
       "portMappings": [
         {
