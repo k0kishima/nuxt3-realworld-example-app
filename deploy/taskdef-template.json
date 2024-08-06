@@ -1,4 +1,9 @@
 {
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+
   "containerDefinitions": [
     {
       "name": "nginx",
@@ -38,12 +43,5 @@
         }
       }
     }
-  ],
-  "family": "${PROJECT}-${APP_ENV}-task",
-  "networkMode": "awsvpc",
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
-  "cpu": "256",
-  "memory": "512"
+  ]
 }

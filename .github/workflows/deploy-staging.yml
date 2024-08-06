@@ -56,7 +56,7 @@ jobs:
         id: register-task-def
         run: |
           TASK_DEF_ARN=$(aws ecs register-task-definition \
-            --family realworld-example-staging-task \
+            --family realworld-example-staging-ecs-task \
             --execution-role-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-staging-ecs-task-execution-role \
             --task-role-arn arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/realworld-example-staging-ecs-task-role \
             --cli-input-json file://taskdef.json \
