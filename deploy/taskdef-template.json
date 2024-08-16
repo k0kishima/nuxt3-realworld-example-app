@@ -16,6 +16,12 @@
           "protocol": "tcp"
         }
       ],
+      "environment": [
+        {
+          "name": "API_BASE_URL",
+          "value": "${API_BASE_URL}"
+        }
+      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {

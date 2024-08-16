@@ -60,6 +60,7 @@ jobs:
           APP_IMAGE_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realworld-example-staging-frontend-ecr-repo:latest
           PROJECT: realworld-example
           APP_ENV: staging
+          DB_HOST: ${{ secrets.API_BASE_URL }}
 
       - name: Register ECS task definition
         id: register-task-def
