@@ -43,13 +43,7 @@
           "awslogs-region": "ap-northeast-1",
           "awslogs-stream-prefix": "frontend-app"
         }
-      },
-      "environment": [
-        {
-          "name": "API_BASE_URL",
-          "value": "${API_BASE_URL}"
-        }
-      ]
+      }
     }
   ]
 }

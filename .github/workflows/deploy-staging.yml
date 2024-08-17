@@ -51,6 +51,8 @@ jobs:
           file: ./deploy/nuxt/Dockerfile
           push: true
           tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realworld-example-staging-frontend-app-ecr-repo:latest
+          build-args: |
+            API_BASE_URL=${{ secrets.API_BASE_URL }}
 
       - name: Render task definition from template
         id: render-task-def
@@ -60,7 +62,6 @@ jobs:
           APP_IMAGE_URI: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realworld-example-staging-frontend-app-ecr-repo:latest
           PROJECT: realworld-example
           APP_ENV: staging
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
 
       - name: Register ECS task definition
         id: register-task-def
